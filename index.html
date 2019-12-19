@@ -1,0 +1,11 @@
+<html>
+  <script>
+    var downEvent = 'ontouchstart' in document.documentElement ? 'touchstart' : 'mousedown';
+
+    document.addEventListener(downEvent, function(e) {
+      var quackSound = new Audio();
+      quackSound.src = "./sounds/all-i-want-for-christmas-is.ogg"; // TODO - some browsers don't like mp3
+      quackSound.play();
+    });
+  </script>
+</html>
