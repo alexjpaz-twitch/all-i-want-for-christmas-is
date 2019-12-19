@@ -1,11 +1,35 @@
 <html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div class='tree'>🎄</div>
+  </body>
+  <style>
+    .tree {
+      font-size: 200px;
+    }
+  </style>
   <script>
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
     var downEvent = 'ontouchstart' in document.documentElement ? 'touchstart' : 'mousedown';
 
     document.addEventListener(downEvent, function(e) {
-      var quackSound = new Audio();
-      quackSound.src = "./sounds/all-i-want-for-christmas-is.ogg"; // TODO - some browsers don't like mp3
-      quackSound.play();
+      var intro = new Audio();
+      intro.src = "./sounds/all-i-want-for-christmas-is.ogg"; // TODO - some browsers don't like mp3
+      intro.play();
+
+      intro.onended = function() {
+        setTimeout(function() {
+          var you = new Audio();
+          you.src = "./sounds/you.ogg"; // TODO - some browsers don't like mp3
+          you.play();
+        }, getRandomInt(2000, 10000));
+      };
     });
   </script>
 </html>
