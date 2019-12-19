@@ -1,13 +1,53 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div class='tree'>🎄</div>
+    <div class='flex-container'>
+      <div class='flex-center noselect'>
+        <div class='tree'>🎄</div>
+      </div>
+    </div>
   </body>
   <style>
     .tree {
       font-size: 200px;
+    }
+
+    .noselect {
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none; /* Non-prefixed version, currently
+                            supported by Chrome, Opera and Firefox */
+    }
+    body,html {
+      padding: 0;
+      margin: 0;
+      font-family: sans-serif;
+      height: 100%;
+    }
+    .flex-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .flex-center {
+      max-width: 50%;
+      flex: 1;
+    }
+    @media only screen and (min-width: 992px) {
+      .tree {
+        max-width: 200px;
+        margin: auto;
+      }
+      .flex-container {
+      }
     }
   </style>
   <script>
@@ -26,7 +66,7 @@
       intro.onended = function() {
         setTimeout(function() {
           var you = new Audio();
-          you.src = "./sounds/you.ogg"; // TODO - some browsers don't like mp3
+          you.src = "./sounds/you-soft.ogg"; // TODO - some browsers don't like mp3
           you.play();
         }, getRandomInt(2000, 10000));
       };
