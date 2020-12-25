@@ -60,7 +60,7 @@
     var downEvent = 'ontouchstart' in document.documentElement ? 'touchstart' : 'mousedown';
     
       ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
-        if( flags.broadcaster && command === "xmas" ) {
+        if(command === "xmas" ) {
             
           var intro = new Audio();
           intro.src = "./sounds/all-i-want-for-christmas-is.ogg"; // TODO - some browsers don't like mp3
