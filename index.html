@@ -57,24 +57,81 @@
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min)) + min;
     }
-    var downEvent = 'ontouchstart' in document.documentElement ? 'touchstart' : 'mousedown';
-    
-      ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
-        if(command === "xmas" ) {
-            
-          var intro = new Audio();
-          intro.src = "./sounds/all-i-want-for-christmas-is.ogg"; // TODO - some browsers don't like mp3
-          intro.play();
 
-          intro.onended = function() {
-            setTimeout(function() {
-              var you = new Audio();
-              you.src = "./sounds/you-soft.ogg"; // TODO - some browsers don't like mp3
-              you.play();
-            }, getRandomInt(5000, 10000));
-          };
+    function youSoft() {
+      setTimeout(function() {
+        var you = new Audio();
+        you.src = "./sounds/you-soft.ogg"; // TODO - some browsers don't like mp3
+        you.play();
+      }, getRandomInt(5000, 10000));
+
+    }
+
+    function youC() {
+      var you = new Audio();
+      you.src = "./sounds/you-c.ogg"; // TODO - some browsers don't like mp3
+      you.play();
+    }
+
+    function youDsharp() {
+      var you = new Audio();
+      you.src = "./sounds/you-dsharp.ogg"; // TODO - some browsers don't like mp3
+      you.play();
+    }
+
+    function youLoop() {
+      var maximum = 15
+      var minimum = 5
+
+      var iterations = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
+
+      let tid = null;
+
+      function play() {
+        if(iterations <= 0) {
+          var you = new Audio();
+          you.src = "./sounds/you.ogg"; // TODO - some browsers don't like mp3
+          you.play();
+        } else {
+          var loop = new Audio();
+          loop.src = "./sounds/is-infinite.ogg"; // TODO - some browsers don't like mp3
+          loop.play();
+          iterations--;
+          setTimeout(play, 900);
         }
       }
-      ComfyJS.Init( "alexjpaz" );
+      play();
+    }
+
+    function noYou() {
+    }
+
+
+
+    ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
+      if(command === "xmas" ) {
+        console.log('xmas');
+
+        var intro = new Audio();
+        intro.src = "./sounds/all-i-want-for-christmas-is.ogg"; // TODO - some browsers don't like mp3
+        intro.play();
+
+        var items = [
+          youLoop,
+          youSoft,
+          youDsharp,
+          youC,
+          noYou,
+        ];
+
+        var item = items[Math.floor(Math.random() * items.length)];
+        console.log(item);
+
+        intro.onended = function() {
+          item();
+        };
+      }
+    }
+    ComfyJS.Init( "alexjpaz" );
   </script>
 </html>
