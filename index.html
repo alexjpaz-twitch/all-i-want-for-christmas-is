@@ -50,6 +50,7 @@
       }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
   <script>
     function getRandomInt(min, max) {
       min = Math.ceil(min);
@@ -57,19 +58,23 @@
       return Math.floor(Math.random() * (max - min)) + min;
     }
     var downEvent = 'ontouchstart' in document.documentElement ? 'touchstart' : 'mousedown';
+    
+      ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
+        if( flags.broadcaster && command === "xmas" ) {
+            
+          var intro = new Audio();
+          intro.src = "./sounds/all-i-want-for-christmas-is.ogg"; // TODO - some browsers don't like mp3
+          intro.play();
 
-    document.addEventListener(downEvent, function(e) {
-      var intro = new Audio();
-      intro.src = "./sounds/all-i-want-for-christmas-is.ogg"; // TODO - some browsers don't like mp3
-      intro.play();
+          intro.onended = function() {
+            setTimeout(function() {
+              var you = new Audio();
+              you.src = "./sounds/you-soft.ogg"; // TODO - some browsers don't like mp3
+              you.play();
+            }, getRandomInt(5000, 10000));
+          };
+        }
+      }
+      ComfyJS.Init( "alexjpaz" );
 
-      intro.onended = function() {
-        setTimeout(function() {
-          var you = new Audio();
-          you.src = "./sounds/you-soft.ogg"; // TODO - some browsers don't like mp3
-          you.play();
-        }, getRandomInt(5000, 10000));
-      };
-    });
-  </script>
 </html>
